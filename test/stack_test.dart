@@ -36,7 +36,8 @@ void main() {
         stack.push('abc');
         stack.push('def');
         stack.push('ghi');
-        fail('should throw an exception for exceeding stack size, but it did not.');
+        fail(
+            'should throw an exception for exceeding stack size, but it did not.');
       } catch (ex) {
         expect(ex, isA<IllegalOperationException>());
       }

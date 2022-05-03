@@ -17,17 +17,22 @@ class Stack<T> {
     _sizeMax = noLimit;
   }
 
+  /// Generate a new stack from list of elements
+  factory Stack.fromList(List<T> elements) {
+    final stack = Stack<T>();
+    elements.forEach((element) => stack.push(element));
+    return stack;
+  }
+
   /// Constructor in which you can specify maximum number of entries.
   /// This maximum is a limit that is enforced as entries are pushed on to the stack
   /// to prevent stack growth beyond a maximum size. There is no pre-allocation of
   /// slots for entries at any time in this library.
   Stack.sized(int sizeMax) {
-    if(sizeMax < 2) {
+    if (sizeMax < 2) {
       throw IllegalOperationException(
-        'Error: stack size must be 2 entries or more '
-      );
-    }
-    else {
+          'Error: stack size must be 2 entries or more ');
+    } else {
       _sizeMax = sizeMax;
     }
   }
@@ -40,12 +45,11 @@ class Stack<T> {
 
   /// push element in top of the stack.
   void push(T e) {
-    if(_sizeMax == noLimit || _list.length < _sizeMax) {
+    if (_sizeMax == noLimit || _list.length < _sizeMax) {
       _list.addLast(e);
-    }
-    else {
+    } else {
       throw IllegalOperationException(
-        'Error: cannot add element. Stack already at maximum size of: ${_sizeMax} elements');
+          'Error: cannot add element. Stack already at maximum size of: ${_sizeMax} elements');
     }
   }
 
@@ -91,5 +95,10 @@ class Stack<T> {
     for (var item in List<T>.from(_list).reversed) {
       core.print(item);
     }
+  }
+
+  /// Return as a list of elements
+  List<T> toList() {
+    return _list.toList();
   }
 }
